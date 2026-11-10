@@ -1,0 +1,7 @@
+{
+  "name": "CMA PrepMaster - Prometric Exam Simulator",
+  "description": "FinHornet. Authentic US CMA Part 1 Prometric mock exam simulator with timed tests, performance analytics, case-based exhibits, and Gemini AI tutor.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

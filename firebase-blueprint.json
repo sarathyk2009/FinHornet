@@ -1,0 +1,137 @@
+{
+  "entities": {
+    "Question": {
+      "title": "Question",
+      "description": "US CMA exam question stored in Firestore.",
+      "type": "object",
+      "properties": {
+        "part": {
+          "type": "string",
+          "enum": ["part1", "part2"]
+        },
+        "domain": {
+          "type": "string",
+          "description": "Section or domain topic e.g. Performance Management, Cost Management"
+        },
+        "subtopic": {
+          "type": "string",
+          "description": "Specific topic area"
+        },
+        "scenario": {
+          "type": "string",
+          "description": "Background scenario narrative"
+        },
+        "questionText": {
+          "type": "string",
+          "description": "The exact question stem"
+        },
+        "options": {
+          "type": "array",
+          "description": "Array of 4 options (A, B, C, D)"
+        },
+        "correctOption": {
+          "type": "string",
+          "enum": ["A", "B", "C", "D"]
+        },
+        "conciseHint": {
+          "type": "string",
+          "description": "Quick concept hint"
+        },
+        "explanation": {
+          "type": "object",
+          "description": "Detailed explanation with steps and distractor analysis"
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["Medium", "Hard", "Exam Standard"]
+        },
+        "isFreeTrialSample": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        }
+      },
+      "required": ["questionText", "options", "correctOption"]
+    },
+    "CouponCode": {
+      "title": "CouponCode",
+      "description": "Promotional coupon code for checkout discounts.",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "discountType": { "type": "string", "enum": ["percentage", "flat"] },
+        "discountValue": { "type": "number" },
+        "expirationDate": { "type": "string" },
+        "usageLimit": { "type": "number" },
+        "usageCount": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["code", "discountType", "discountValue", "isActive"]
+    },
+    "UserDiscount": {
+      "title": "UserDiscount",
+      "description": "Direct email-specific candidate discounts assigned by Admin.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "candidateName": { "type": "string" },
+        "discountType": { "type": "string", "enum": ["percentage", "flat"] },
+        "discountValue": { "type": "number" },
+        "note": { "type": "string" },
+        "assignedAt": { "type": "string" }
+      },
+      "required": ["email", "discountType", "discountValue"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Verified administrator record.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin"] },
+        "assignedAt": { "type": "string" }
+      },
+      "required": ["email", "role"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile in Firestore.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "isPremium": { "type": "boolean" },
+        "hasActivePass": { "type": "boolean" }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "/questions/{questionId}": {
+      "schema": "Question",
+      "description": "Master questions collection for US CMA exam practice tests and mock simulations."
+    },
+    "/coupons/{couponId}": {
+      "schema": "CouponCode",
+      "description": "Promotional discount codes managed by Admins and redeemed by students."
+    },
+    "/discounts/{discountId}": {
+      "schema": "UserDiscount",
+      "description": "Direct candidate email discounts assigned by Admins."
+    },
+    "/admins/{adminUid}": {
+      "schema": "Admin",
+      "description": "Administrator roles collection for RBAC authorization."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile records."
+    }
+  }
+}

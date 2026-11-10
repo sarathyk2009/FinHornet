@@ -1,0 +1,76 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        (request.auth.token.email != null && request.auth.token.email.lower() == 'sarathyk2009@gmail.com') ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Questions collection:
+    // Anyone (students, test takers, practice runners) can read questions
+    // Only verified admin email (sarathyk2009@gmail.com) or admin record can create, update, or delete
+    match /questions/{questionId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin() && isValidId(questionId);
+    }
+
+    // Coupons collection:
+    // Read allowed for students to validate promo codes at checkout
+    // Write strictly restricted to verified admin
+    match /coupons/{couponId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin() && isValidId(couponId);
+    }
+
+    // Candidate Email Discounts collection:
+    // Read allowed for students to check if their email has a direct discount
+    // Write strictly restricted to verified admin
+    match /discounts/{discountId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin() && isValidId(discountId);
+    }
+
+    // Admins registry collection
+    match /admins/{adminUid} {
+      allow read, write: if isAdmin() && isValidId(adminUid);
+    }
+
+    // User accounts collection
+    match /users/{userId} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin()) && isValidId(userId);
+      allow create, update: if isSignedIn() && request.auth.uid == userId && isValidId(userId);
+      allow delete: if isAdmin() && isValidId(userId);
+    }
+
+    // Blogs collection:
+    // Anyone can read blog posts
+    // Only verified admin can create, update, or delete blogs
+    match /blogs/{blogId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin() && isValidId(blogId);
+    }
+
+    // Callback Requests collection (Leads submitted from Talk to Us form):
+    // Any visitor can create a callback request
+    // Only verified admin can read, update (mark contacted), or delete leads
+    match /callback_requests/{requestId} {
+      allow create: if isValidId(requestId);
+      allow read, update, delete: if isAdmin() && isValidId(requestId);
+    }
+  }
+}
