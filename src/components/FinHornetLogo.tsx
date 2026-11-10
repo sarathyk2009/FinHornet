@@ -31,7 +31,7 @@ export const FinHornetLogo: React.FC<Props> = ({
       {/* FinHornet Official Logo Image (Yellow Hornet icon) */}
       <div className="relative shrink-0 transition-transform duration-200 hover:scale-105">
         <img
-          src="/assets/aistudio/WhatsApp_Image_2026-10-26_at_1.37.51_AM_bdac2704.jpeg"
+          src="./assets/aistudio/WhatsApp_Image_2026-10-26_at_1.37.51_AM_bdac2704.jpeg"
           alt="FinHornet Logo"
           className={`${imageSizeClasses} object-cover ring-2 ring-amber-400/50 dark:ring-amber-400/30 shadow-md shadow-amber-500/10`}
           loading="eager"

@@ -311,7 +311,7 @@ export const PremiumPaywallModal: React.FC<Props> = ({
         currency: orderData.currency || 'INR',
         name: 'FinHornet',
         description: selectedPlan === 'monthly' ? 'CMA Part 1 Sprint Pass' : 'CMA Part 1 Complete Pass',
-        image: '/assets/aistudio/WhatsApp_Image_2026-10-26_at_1.37.51_AM_bdac2704.jpeg',
+        image: './assets/aistudio/WhatsApp_Image_2026-10-26_at_1.37.51_AM_bdac2704.jpeg',
         order_id: orderId,
         theme: {
           color: '#F59E0B',

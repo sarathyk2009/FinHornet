@@ -386,9 +386,6 @@ export default function App() {
           // Admin authorized
         } else {
           // Block regular student from accessing /admin
-          if (window.history.pushState) {
-            window.history.pushState(null, '', '/');
-          }
           window.location.hash = '';
           setAccessDeniedMessage(
             'Access Restricted: The /admin portal is strictly reserved for verified administrators.'
@@ -555,7 +552,6 @@ export default function App() {
     }));
     if (newRole === 'user') {
       setCurrentTab('dashboard');
-      if (window.history.pushState) window.history.pushState(null, '', '/');
       window.location.hash = '';
     } else {
       setAdminTab('questions');
@@ -795,7 +791,6 @@ export default function App() {
       window.location.hash = '#admin';
     } else {
       setCurrentTab('dashboard');
-      if (window.history.pushState) window.history.pushState(null, '', '/');
       window.location.hash = '';
     }
   };
@@ -831,7 +826,6 @@ export default function App() {
     setPublicTab('home');
     setCurrentTab('dashboard');
     localStorage.removeItem('finnerd_user_state');
-    if (window.history.pushState) window.history.pushState(null, '', '/');
     window.location.hash = '';
   };
 

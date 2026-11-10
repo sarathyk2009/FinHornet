@@ -233,7 +233,7 @@ export const FinHornetGeminiChatbot: React.FC<Props> = ({
             title="Ask FinHornet AI - Where Numbers Meet Nerve"
           >
             <img
-              src="/assets/aistudio/WhatsApp_Image_2026-10-26_at_1.37.51_AM_bdac2704.jpeg"
+              src="./assets/aistudio/WhatsApp_Image_2026-10-26_at_1.37.51_AM_bdac2704.jpeg"
               alt="FinHornet"
               className="w-10 h-10 rounded-xl object-cover ring-1 ring-slate-950/20"
             />
@@ -263,7 +263,7 @@ export const FinHornetGeminiChatbot: React.FC<Props> = ({
           <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-amber-950 text-white px-4 py-3 flex items-center justify-between border-b border-amber-500/30">
             <div className="flex items-center gap-2.5">
               <img
-                src="/assets/aistudio/WhatsApp_Image_2026-10-26_at_1.37.51_AM_bdac2704.jpeg"
+                src="./assets/aistudio/WhatsApp_Image_2026-10-26_at_1.37.51_AM_bdac2704.jpeg"
                 alt="FinHornet Logo"
                 className="w-8 h-8 rounded-lg object-cover ring-1 ring-amber-400/60"
               />
